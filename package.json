@@ -1,0 +1,22 @@
+{
+  "name": "bdf-lab-01",
+  "version": "1.0.0",
+  "description": "Backend Development Fundamentals Lab 1 - Node.js and Express Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "http-server": "node http-server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "backend-development",
+    "bdf-lab-01"
+  ],
+  "author": "J Harshini",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
