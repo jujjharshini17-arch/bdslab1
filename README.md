@@ -8,13 +8,29 @@
 
 ---
 
+## 🌐 Public Deployment & Repository Links
+
+- **GitHub Repository:** [https://github.com/jujjharshini17-arch/bdslab1](https://github.com/jujjharshini17-arch/bdslab1)
+- **Live Production URL (Render):** [https://bdslab1.onrender.com/](https://bdslab1.onrender.com/)
+
+### 🚀 Verified Live Endpoints (Render):
+| Endpoint | Method | Live URL | Expected Status | Response Format |
+|---|---|---|---|---|
+| **Root (Welcome)** | `GET` | [`https://bdslab1.onrender.com/`](https://bdslab1.onrender.com/) | `200 OK` | Plain text welcome message |
+| **About (Student Info)** | `GET` | [`https://bdslab1.onrender.com/about`](https://bdslab1.onrender.com/about) | `200 OK` | JSON: `{ "name": "J Harshini", "section": "207 AI ML - 2B" }` |
+| **Time (Dynamic Date)** | `GET` | [`https://bdslab1.onrender.com/time`](https://bdslab1.onrender.com/time) | `200 OK` | Plain text with current date & time |
+| **Unknown (404 Error)** | `GET` | [`https://bdslab1.onrender.com/unknown`](https://bdslab1.onrender.com/unknown) | `404 Not Found` | Plain text 404 error message |
+
+---
+
 ## 1. Project Overview
 
 This project implements **Lab 1: Node.js and Express Server** as part of the Backend Development Fundamentals curriculum. It covers:
 1. Creating a pure Node.js HTTP server using the built-in `http` module (`http-server.js`).
 2. Creating an Express.js server with modular route handlers and status codes (`app.js` and `server.js`).
 3. Handling `GET /`, `GET /about`, `GET /time`, and a catch-all `404 Not Found` route.
-4. Testing and capturing real outputs.
+4. Deploying to **Render** using GitHub continuous deployment with dynamic port binding (`process.env.PORT || 3000`).
+5. Testing and capturing real outputs from local and live production environments.
 
 ---
 
@@ -27,23 +43,30 @@ BDF-Lab-01/
 ├── package-lock.json    # Exact versions of installed npm dependencies
 ├── node_modules/        # Directory containing installed Express library and dependencies
 ├── app.js               # Express application initialization and route definitions
-├── server.js            # Entry point that launches the Express server on port 3000
+├── server.js            # Entry point that launches the Express server (PORT || 3000)
 ├── http-server.js       # Pure Node.js HTTP server using built-in 'http' module
+├── render.yaml          # Render blueprint specification for automated cloud deployment
 ├── .gitignore           # Ignores node_modules and OS-specific files from version control
 ├── README.md            # Comprehensive project documentation
 └── screenshots/         # Actual terminal and browser output screenshots
+    ├── terminal_setup.png
     ├── terminal_http_server.png
     ├── browser_http_server.png
     ├── terminal_express_server.png
     ├── route_root.png
     ├── route_about.png
     ├── route_time.png
-    └── route_404.png
+    ├── route_404.png
+    ├── render_live_terminal.png
+    ├── render_live_root.png
+    ├── render_live_about.png
+    ├── render_live_time.png
+    └── render_live_404.png
 ```
 
 ---
 
-## 3. Prerequisites & Installation
+## 3. Prerequisites & Local Installation
 
 ### Prerequisites
 - **Node.js** (v18 or higher installed on system)
@@ -90,11 +113,11 @@ npm install express
 A **Route** maps an incoming HTTP method (like `GET`) and URL path (like `/about`) to a specific handler function that executes code and returns a response.
 
 ### E. What does `app.listen()` do?
-`app.listen(port, callback)` binds the server to a specific TCP port (e.g., `3000`) and begins listening for incoming client network connections. Once active, it invokes the optional callback function.
+`app.listen(port, callback)` binds the server to a specific TCP port (e.g., `process.env.PORT || 3000`) and begins listening for incoming client network connections. Once active, it invokes the optional callback function.
 
 ---
 
-## 5. How to Run
+## 5. How to Run Locally
 
 ### Running the Pure Node.js HTTP Server:
 ```bash
@@ -111,6 +134,7 @@ npm start
 # OR
 node server.js
 ```
+Open browser at: [http://localhost:3000](http://localhost:3000)
 
 ---
 
@@ -125,7 +149,18 @@ node server.js
 
 ---
 
-## 7. Viva Questions & Quick Answers
+## 7. Cloud Deployment to Render
+
+1. **GitHub Continuous Integration:** The repository is hosted at `https://github.com/jujjharshini17-arch/bdslab1`.
+2. **Dynamic Port Allocation:** `server.js` uses `const PORT = process.env.PORT || 3000;`, enabling Render to inject its dynamic internal port without crashing.
+3. **Build & Start Commands:**
+   - **Build Command:** `npm install`
+   - **Start Command:** `npm start`
+4. **Live Verification:** Verified using cURL against `https://bdslab1.onrender.com` confirming zero downtime and proper Cloudflare reverse proxy routing.
+
+---
+
+## 8. Viva Questions & Quick Answers
 
 1. **What is Node.js?**  
    *Answer:* Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside a web browser, built on Google Chrome's V8 engine.
@@ -141,3 +176,6 @@ node server.js
 
 5. **What is the difference between `res.send()` and `res.json()`?**  
    *Answer:* `res.send()` can send text, HTML, or buffers with appropriate Content-Type. `res.json()` explicitly sets `Content-Type: application/json` and formats JavaScript objects into JSON strings.
+
+6. **Why is `process.env.PORT || 3000` necessary for Render deployment?**  
+   *Answer:* Cloud hosting platforms like Render dynamically assign a port number at runtime via the `PORT` environment variable. Using `process.env.PORT` ensures the application binds to the exact port Render's proxy expects, preventing deployment failure.
