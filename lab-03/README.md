@@ -291,10 +291,11 @@ Screenshots below were provided from the deployed API and saved in `screenshots/
 | Price filtering and pagination | ![Price filter and pagination](screenshots/04_pagination_and_price_filter.png) |
 | GET missing book (ID 11) | ![Missing book response for ID 11](screenshots/extra_missing_book_11.png) |
 | GET missing book (ID 999) | ![404 book not found](screenshots/08_not_found_404.png) |
+| Postman validation error (400) | ![Postman validation error: title is required](screenshots/09_validation_error.png) |
 
-**Still needed:** Postman screenshots showing POST (201 Created), PUT (200 OK), DELETE (200 OK), and validation (400 Bad Request). Postman was used to confirm these live responses: POST created temporary book ID `16`; PUT updated it; DELETE removed it; a POST body without `title` returned `{"message":"title is required"}`. The temporary record was deleted after verification.
+**Still needed:** Postman screenshots showing POST (201 Created), PUT (200 OK), and DELETE (200 OK). Postman confirmed these live responses: POST created temporary book ID `16`; PUT updated it; DELETE removed it. The missing-title POST validation returned `400 Bad Request` with `{"message":"title is required"}`. The temporary record was deleted after verification.
 
-Take each remaining screenshot in Postman with both the request method/body and response status/body visible, then save it into `screenshots/` as `05_post_create_book.png`, `06_put_update_book.png`, `07_delete_book.png`, or `09_validation_error.png`.
+Take each remaining screenshot in Postman with both the request method/body and response status/body visible, then save it into `screenshots/` as `05_post_create_book.png`, `06_put_update_book.png`, or `07_delete_book.png`.
 
 ## 15. Debugging Problems and Solutions
 
