@@ -281,38 +281,20 @@ The script uses only the actual ID returned by POST for the PUT/DELETE checks, d
 
 ## 14. Screenshots
 
-Screenshots of the live API (Postman or browser) should be saved in the `screenshots/` folder with these names:
+Screenshots below were provided from the deployed API and saved in `screenshots/`. The `bdslab1-2.onrender.com` hostname is the confirmed deployment. The sample data has no title containing `python`, so the search evidence uses `search_q=harry` instead.
 
-| Screenshot | File |
+| Evidence | Screenshot |
 |---|---|
-| GET all books | ![GET all books](screenshots/get_all_books.png) |
-| GET single book | ![GET single book](screenshots/get_one_book.png) |
-| POST successful creation | ![POST book](screenshots/post_book.png) |
-| PUT successful update | ![PUT book](screenshots/put_book.png) |
-| DELETE successful deletion | ![DELETE book](screenshots/delete_book.png) |
-| Search result | ![Search result](screenshots/search_result.png) |
-| Sorting result | ![Sorting result](screenshots/sorting_result.png) |
-| Pagination result | ![Pagination result](screenshots/pagination_result.png) |
-| Price filter result | ![Price filter result](screenshots/price_filter_result.png) |
-| Validation error | ![Validation error](screenshots/validation_error.png) |
-| 404 error | ![404 error](screenshots/not_found_404.png) |
+| GET all books | ![GET all books](screenshots/01_get_all_books.png) |
+| GET one book | ![GET one book](screenshots/02_get_single_book.png) |
+| Search and price sorting | ![Search and sort](screenshots/03_search_and_sort.png) |
+| Price filtering and pagination | ![Price filter and pagination](screenshots/04_pagination_and_price_filter.png) |
+| GET missing book (ID 11) | ![Missing book response for ID 11](screenshots/extra_missing_book_11.png) |
+| GET missing book (ID 999) | ![404 book not found](screenshots/08_not_found_404.png) |
 
-**How to capture them (manually):**
+**Still needed:** Postman screenshots showing POST (201 Created), PUT (200 OK), DELETE (200 OK), and validation (400 Bad Request). Postman was used to confirm these live responses: POST created temporary book ID `16`; PUT updated it; DELETE removed it; a POST body without `title` returned `{"message":"title is required"}`. The temporary record was deleted after verification.
 
-1. Start the server: `npm start`.
-2. Open **Postman** (or your browser for GET requests) and send each request:
-   - `GET http://localhost:3000/books/` → save as `get_all_books.png`
-   - `GET http://localhost:3000/books/1/` → save as `get_one_book.png`
-   - `POST http://localhost:3000/books/` with the "Clean Architecture" JSON body above → save as `post_book.png` (note the returned `bookId`)
-   - `PUT http://localhost:3000/books/<bookId>/` → save as `put_book.png`
-   - `GET http://localhost:3000/books/?search_q=harry` → save as `search_result.png`
-   - `GET http://localhost:3000/books/?order_by=price&order=DESC` → save as `sorting_result.png`
-   - `GET http://localhost:3000/books/?limit=3&offset=3` → save as `pagination_result.png`
-   - `GET http://localhost:3000/books/?min_price=100&max_price=700` → save as `price_filter_result.png`
-   - `POST http://localhost:3000/books/` with an invalid body (e.g. no title) → save as `validation_error.png`
-   - `GET http://localhost:3000/books/9999/` → save as `not_found_404.png`
-   - `DELETE http://localhost:3000/books/<bookId>/` → save as `delete_book.png`
-3. Take a screenshot of the request **and** the response body for each, and save it into `screenshots/` with the matching file name above.
+Take each remaining screenshot in Postman with both the request method/body and response status/body visible, then save it into `screenshots/` as `05_post_create_book.png`, `06_put_update_book.png`, `07_delete_book.png`, or `09_validation_error.png`.
 
 ## 15. Debugging Problems and Solutions
 
